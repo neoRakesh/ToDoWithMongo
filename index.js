@@ -25,7 +25,7 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopo
 
 app.listen(3000, () => console.log("server log successfully"));
 
-
+//Starting page entry point that will show list of item
 app.get("/", (req, res) => {
   TodoTask.find({})
     .then(todoTask => {
@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
 
 
 
-
+//Creating todo 
 app.post('/', async (req, res) => {
   const todoTask = new TodoTask({
     content: req.body.content
@@ -58,8 +58,9 @@ app.post('/', async (req, res) => {
 });
 
 
-app
-  .route("/edit/:id")
+//Editing and updating new edited value
+
+app.route("/edit/:id")
   .get((req, res) => {
     const id = req.params.id;
     TodoTask.find({})
@@ -80,6 +81,7 @@ app
   });
 
 
+  //Deleting the selected todo
 app.route("/remove/:id").get((req, res) => {
   const id = req.params.id;
   TodoTask.findByIdAndRemove(id)
