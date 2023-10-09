@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Todo App</title>
+    <link rel="stylesheet" href="/style.css" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="todo-head">
+        <h2>To-Do Application</h2>
+    </div>
+    <div class="todo-container">
+        
+        <div class="todo">
+            
+            <ul class="todo-list">
+                <% todoTasks.forEach(details=> { %>
+                    <% if (details._id==idTask) { %>
+                        <li class="todo-list-item">
+                            <form action="/edit/<%= details._id %>" method="POST">
+                                <input type="text" value="<%= details.content %>" name="content">
+                                <button type="submit">Confirm</button>
+                                <a href="/" class="cancel">Cancel</a>
+                            </form>
+                        </li>
+                        <% } else { %>
+                            <li class="todo-list-item">
+                                <div class="todo-list-item-name">
+                                    <%= details.content %>
+                                </div>
+                                <a href="/edit/<%= details._id %>" class="edit">
+                                    <i class="fas fa-edit">Edit</i>
+
+                                </a>
+                                <a href="/remove/<%= details._id %>" class="delete">
+                                    <i class="fa fa-close">Del</i>
+
+                                </a>
+                            </li>
+                            <% } %>
+                                <% }) %>
+            </ul>
+        </div>
+    </div>
+</body>
